@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { View, Button, TextInput, StyleSheet } from "react-native";
 
 function AddToDos({ handlePressButton }) {
-  const [text, setText] = useState(null);
+  const [text, setText] = useState(" ");
   return (
     <View style={styles.form}>
       <TextInput
         multiline
         style={styles.input}
         placeholder="Type a new todos.."
-        onChangeText={(value) => {
-          setText(value);
+        onChangeText={(val) => {
+          setText(val);
         }}
       />
       <Button
-        title="Add Todos..."
+        title="Add Todos"
         color="coral"
         onPress={() => handlePressButton(text)}
       />

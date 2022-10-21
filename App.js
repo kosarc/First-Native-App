@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Alert } from "react-native";
 import Header from "./components/Header";
 import TodoItem from "./components/TodoItem";
 import AddToDos from "./components/AddToDos";
@@ -18,15 +18,24 @@ export default function App() {
   }
 
   function handlePressButton(newToDos) {
-    setToDo((prevToDos) => {
-      return [
+    if (newToDos.length > 3) {
+      setToDo((prevToDos) => {
+        return [
+          {
+            text: newToDos,
+            id: Math.random().toString(),
+          },
+          ...prevToDos,
+        ];
+      });
+    } else {
+      return Alert.alert("OOPS!", "Type more chars in todo list!", [
         {
-          text: newToDos,
-          id: Math.random().toString(),
+          text: "Understood",
+          onPress: () => (alert, closed),
         },
-        ...prevToDos,
-      ];
-    });
+      ]);
+    }
   }
 
   return (
@@ -54,7 +63,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 2,
+    marginTop: 31,
     flex: 1,
   },
   content: {

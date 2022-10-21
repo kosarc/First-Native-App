@@ -12,7 +12,9 @@ function TodoItem({ item, handlePress }) {
 const styles = StyleSheet.create({
   item: {
     marginTop: 10,
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 8,
+    width: "100%",
     borderWidth: 1,
     borderStyle: "dashed",
     borderRadius: 4,
