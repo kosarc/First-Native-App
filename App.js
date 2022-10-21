@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import Header from "./components/Header";
+import TodoItem from "./components/TodoItem";
+import AddToDos from "./components/AddToDos";
 
 export default function App() {
   const [toDo, setToDo] = useState([
@@ -8,19 +10,39 @@ export default function App() {
     { text: "create an app", id: "2" },
     { text: "play on the switch", id: "3" },
   ]);
+  function handlePress(itemId) {
+    console.log(itemId);
+    setToDo((prevToDos) => {
+      return prevToDos.filter((toDo) => toDo.id != itemId);
+    });
+  }
+
+  function handlePressButton(newToDos) {
+    setToDo((prevToDos) => {
+      return [
+        {
+          text: newToDos,
+          id: Math.random().toString(),
+        },
+        ...prevToDos,
+      ];
+    });
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Header />
         <View style={styles.content}>
-          {/* Form */}
+          <AddToDos handlePressButton={handlePressButton} />
           <View style={styles.list}>
             <FlatList
               data={toDo}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
-                <Text style={styles.items}>{item.text}</Text>
+                <Text style={styles.items}>
+                  <TodoItem item={item} handlePress={handlePress} />
+                </Text>
               )}
             />
           </View>
@@ -34,5 +56,8 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 2,
     flex: 1,
+  },
+  content: {
+    marginTop: 10,
   },
 });
