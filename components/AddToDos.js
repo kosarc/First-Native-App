@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Button, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 
 function AddToDos({ handlePressButton }) {
   const [text, setText] = useState(" ");
@@ -7,17 +7,24 @@ function AddToDos({ handlePressButton }) {
     <View style={styles.form}>
       <TextInput
         multiline
+        ref={(val) => {
+          this.textInput = val;
+        }}
         style={styles.input}
         placeholder="Type a new todos.."
         onChangeText={(val) => {
           setText(val);
         }}
       />
-      <Button
-        title="Add Todos"
-        color="coral"
-        onPress={() => handlePressButton(text)}
-      />
+      <Pressable
+        style={styles.button}
+        onPress={() => {
+          handlePressButton(text);
+          this.textInput.clear();
+        }}
+      >
+        <Text style={styles.title}>Add todos</Text>
+      </Pressable>
     </View>
   );
 }
@@ -30,6 +37,18 @@ const styles = StyleSheet.create({
   },
   form: {
     marginBottom: 40,
+  },
+  button: {
+    marginTop: 20,
+    backgroundColor: "coral",
+    padding: 15,
+    borderRadius: 10,
+    marginHorizontal: 60,
+  },
+  title: {
+    color: "white",
+    fontSize: 18,
+    textAlign: "center",
   },
 });
 

@@ -15,13 +15,11 @@ const styles = StyleSheet.create({
     height: 60,
   },
   title: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    paddingTop: 15,
+    textAlign: "center",
     color: "white",
     fontWeight: "bold",
     fontSize: 24,
-    height: "100%",
   },
 });
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   FlatList,
   Alert,
@@ -14,9 +13,9 @@ import AddToDos from "./components/AddToDos";
 
 export default function App() {
   const [toDo, setToDo] = useState([
-    { text: "buy coffee", id: "1" },
-    { text: "create an app", id: "2" },
-    { text: "play on the switch", id: "3" },
+    { text: "Buy coffee", id: "1" },
+    { text: "Create an app", id: "2" },
+    { text: "Play on the switch", id: "3" },
   ]);
   function handlePress(itemId) {
     console.log(itemId);
@@ -37,10 +36,10 @@ export default function App() {
         ];
       });
     } else {
-      return Alert.alert("OOPS!", "Type more chars in todo list!", [
+      return Alert.alert("OOPS!", "Type more chars in toDo list!", [
         {
           text: "Understood",
-          onPress: () => (alert, closed),
+          onPress: () => null,
         },
       ]);
     }
@@ -58,9 +57,7 @@ export default function App() {
                 data={toDo}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                  <Text style={styles.items}>
-                    <TodoItem item={item} handlePress={handlePress} />
-                  </Text>
+                  <TodoItem item={item} handlePress={handlePress} />
                 )}
               />
             </View>
@@ -78,5 +75,12 @@ const styles = StyleSheet.create({
   },
   content: {
     marginTop: 10,
+    flex: 1,
+  },
+  header: {
+    flex: 1,
+  },
+  list: {
+    flex: 1,
   },
 });
